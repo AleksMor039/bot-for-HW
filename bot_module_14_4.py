@@ -25,25 +25,10 @@ async def start(message):
 
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
-    images = ['files/1.png', 'files/2.png', 'files/3.png', 'files/4.png',]
-    list_prod = get_all_products()
-    for i in list_prod:
-        await message.answer(f'Название {title[0]}' | f'Описание {discription[0]}' | f'Цена: {price[0]}')
-    with open(images, 'rb') as img:
-        await message.answer_photo(img)
-    await message.answer(text="Выберите продукт для покупки:", reply_markup=catalog_kb)
-
-
-
-    # with open('files/1.png', "rb") as img1:
-    #     await message.answer_photo(img1, f'Название: Product1 | Описание: витамины | Цена: {1 * 100}')
-    # with open('files/2.png', "rb") as img2:
-    #     await message.answer_photo(img2, f'Название: Product2 | Описание: БАДы | Цена: {2 * 100}')
-    # with open('files/3.png', "rb") as img3:
-    #     await message.answer_photo(img3, f'Название: Product3 | Описание: Креатин | Цена: {3 * 100}')
-    # with open('files/4.png', "rb") as img4:
-    #     await message.answer_photo(img4, f'Название: Product4 | Описание: Молотые грибы | Цена: {4 * 100}')
-
+    for index, product in enumerate(get_all_products()):
+        await message.answer(f"Название:{product[1]} | Описание:{product[2]} | Цена: {product[3]}")
+        with open(f'files{index + 1}.png', 'rb') as photo:
+           await message.answer_photo(photo)
     await message.answer(text="Выберите продукт для покупки:", reply_markup=catalog_kb)
 
 
