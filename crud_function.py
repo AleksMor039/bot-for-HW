@@ -30,7 +30,7 @@ def add_bd(id, title, description, price):
     check_bd = cursor.execute("SELECT * FROM Users WHERE id=?", (id,))
     if check_bd.fetchone() is None:
         cursor.execute(f'''
-    INSERT INTO Users VALUES('{id}','{title}','{description}',{price})
+    INSERT INTO Products VALUES('{id}','{title}','{description}',{price})
     ''')
     connection.commit()
 
