@@ -16,7 +16,6 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 
 """ф-ия по отработке команды /start"""
 
-
 @dp.message_handler(commands=['start'])
 async def start(message):
     await message.answer("Привет! Я бот помогающий твоему здоровью.",
@@ -38,9 +37,7 @@ async def send_confirm_message(call):
     await call.answer()
 
 
-
 """создание класса с 3-мя объектами"""
-
 
 class UserState(StatesGroup):
     age = State()  # возраст
@@ -50,7 +47,6 @@ class UserState(StatesGroup):
 
 """отработка кода по установлению возраста"""
 
-
 @dp.message_handler(text='Рассчитать')
 async def set_age(message):
     await message.answer('Введите свой возраст:')
@@ -58,7 +54,6 @@ async def set_age(message):
 
 
 """отработка кода по установлению роста"""
-
 
 @dp.message_handler(state=UserState.age)
 async def set_growth(message, state):
@@ -69,7 +64,6 @@ async def set_growth(message, state):
 
 """отработка кода по установлению веса"""
 
-
 @dp.message_handler(state=UserState.growth)
 async def set_weigt(message, state):
     await state.update_data(growth=message.text)
@@ -78,7 +72,6 @@ async def set_weigt(message, state):
 
 
 """отработка кода по расчёту нормы калорий"""
-
 
 @dp.message_handler(state=UserState.weight)
 async def send_calories(message, state):
@@ -90,9 +83,6 @@ async def send_calories(message, state):
     calories = int(10 * weight + 6.25 * growth - 5 * age + 5)  # формула Миффлина-Сан Жеора (для мужчин)
     await message.answer(f"Ваша норма калорий: {calories} Ккал в день")
     await state.finish()
-
-
-
 
 
 @dp.message_handler()
