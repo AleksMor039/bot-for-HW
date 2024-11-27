@@ -44,10 +44,10 @@ def add_bd(id, title, description, price):
         cursor.execute(
             "INSERT INTO Products (id, title, description, price) VALUES(?, ?, ?, ?)",
             (id, title, description, price))
-    connection.commit()
-    print(f"Продукт с id={id} успешно добавлен.")
+        connection.commit()
+        print(f"Продукт с id={id} успешно добавлен.")
     else:
-    print(f"Продукт с id={id} уже существует.")
+        print(f"Продукт с id={id} уже существует.")
     connection.close()
 
 
